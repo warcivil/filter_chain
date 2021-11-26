@@ -3,7 +3,7 @@ import os
 import sys
 from functools import wraps
 
-from config import INPUT_PATH, OUTPUT_PATH
+from configs.config import INPUT_PATH, OUTPUT_PATH
 
 
 def exception_output(func):

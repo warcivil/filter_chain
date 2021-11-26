@@ -1,7 +1,7 @@
 import sys
 
-from config import FILTER_SET, OUTPUT_PATH
-from file_manager import file_manager
+from configs.config import FILTER_SET
+from managers.file_manager import file_manager
 
 
 class CleanManager:
