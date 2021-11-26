@@ -1,6 +1,6 @@
 import sys
 
-from config import OUTPUT_PATH, FILTER_SET
+from config import FILTER_SET
 from file_manager import file_manager
 
 
