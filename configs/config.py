@@ -3,7 +3,7 @@ from filters.filters import get_even_dict, get_not_none_value_dict, get_dict_con
 from pathlib import Path
 
 INPUT_PATH = Path('C:/', 'Users', 'pixte', 'Desktop', 'filter_chain', 'input')
-OUTPUT_PATH = Path('C:/', 'Users', 'pixte', 'Desktop', 'task', '')
+OUTPUT_PATH = Path('C:/', 'Users', 'pixte', 'Desktop', 'filter_chain', 'output')
 
 FILTER_SET = [
     get_even_dict,

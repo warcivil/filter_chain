@@ -1,0 +1,20 @@
+{
+    "_id": "61a140180357d07eb73e0efc",
+    "index": 0,
+    "guid": "775bf50e-160b-46d2-b62e-12b7ee24180f",
+    "isActive": true,
+    "balance": "$1,185.37",
+    "picture": "http://placehold.it/32x32",
+    "age": 31,
+    "eyeColor": "brown",
+    "name": "Hester Ward",
+    "gender": "female",
+    "company": "WAZZU",
+    "email": "hesterward@wazzu.com",
+    "phone": "+1 (906) 494-2272",
+    "address": "747 Ivan Court, Boonville, New Jersey, 6706",
+    "about": "Proident consequat officia magna exercitation aute quis occaecat anim id in pariatur. Minim nisi dolor ex reprehenderit nostrud. Adipisicing velit fugiat irure consectetur nisi aute culpa anim sit est reprehenderit est in laboris. Minim ex cillum incididunt Lorem nisi officia Lorem incididunt sint.\r\n",
+    "registered": "2019-10-17T03:02:04 -05:00",
+    "latitude": -36.409182,
+    "longitude": -5.161963
+  }
