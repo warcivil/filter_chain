@@ -1,14 +1,18 @@
 import sys
 
-from config import FILTER_SET
+from config import FILTER_SET, OUTPUT_PATH
 from file_manager import file_manager
 
 
 class CleanManager:
+    def __init__(self):
+        self.filter_set = FILTER_SET
+
     def filter_chain(self):
+        print('выполнение задач')
         datasets = file_manager.get_data_and_filename()
         for dataset, filename in datasets:
-            for filter in FILTER_SET:
+            for filter in self.filter_set:
                 dataset = self.get_filter_data(filter, dataset)
                 file_manager.save_data(filename, dataset)
 

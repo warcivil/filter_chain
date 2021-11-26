@@ -1,5 +1,5 @@
 def get_even_dict(raw_data: dict) -> dict:
-    raw_data = {key: value for key, value in raw_data.items() if isinstance(value, int) and  value % 2 == 0}
+    raw_data = {key: value for key, value in raw_data.items() if value % 2 == 0}
     return raw_data
 
 def get_dict_consisting_of_string(raw_data: dict) -> dict:
