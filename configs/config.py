@@ -6,8 +6,8 @@ INPUT_PATH = Path('C:/', 'Users', 'pixte', 'Desktop', 'filter_chain', 'input')
 OUTPUT_PATH = Path('C:/', 'Users', 'pixte', 'Desktop', 'filter_chain', 'output')
 
 FILTER_SET = [
-    get_even_dict,
     get_not_none_value_dict,
+    get_even_dict,
     get_dict_consisting_of_string,
 ]
 
