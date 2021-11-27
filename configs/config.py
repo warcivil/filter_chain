@@ -5,7 +5,6 @@ from pathlib import PurePath
 
 INPUT_PATH = PurePath('/Users', 'sif', 'desktop', 'filter_chain', 'data_center_directory', 'input')
 OUTPUT_PATH = PurePath('/Users', 'sif', 'desktop', 'filter_chain', 'data_center_directory', 'output')
-print(INPUT_PATH)
 
 FILTER_SET = [
     get_not_none_value_dict,
