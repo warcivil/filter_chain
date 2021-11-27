@@ -1,6 +1,6 @@
 import sys
 
-from configs.config import FILTER_SET
+from configs.config import FILTER_SET, OUTPUT_PATH
 from managers.file_manager import file_manager
 
 
@@ -15,7 +15,7 @@ class CleanManager:
             for filter in self.filter_set:
                 dataset = self.get_filter_data(filter, dataset)
                 file_manager.save_data(filename, dataset)
-
+            print(f'{filename} успешно проведен через все фильтры и записан в {OUTPUT_PATH}')
     def get_filter_data(self, filter, dataset):
         try:
             dataset = filter(dataset)
