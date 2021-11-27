@@ -1,9 +1,11 @@
+import pathlib
 import sys
 from filters.filters import get_even_dict, get_not_none_value_dict, get_dict_consisting_of_string
-from pathlib import Path
+from pathlib import PurePath
 
-INPUT_PATH = Path('C:/', 'Users', 'pixte', 'Desktop', 'filter_chain', 'input')
-OUTPUT_PATH = Path('C:/', 'Users', 'pixte', 'Desktop', 'filter_chain', 'output')
+INPUT_PATH = PurePath('/Users', 'sif', 'desktop', 'filter_chain', 'data_center_directory', 'input')
+OUTPUT_PATH = PurePath('/Users', 'sif', 'desktop', 'filter_chain', 'data_center_directory', 'output')
+print(INPUT_PATH)
 
 FILTER_SET = [
     get_not_none_value_dict,
