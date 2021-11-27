@@ -11,5 +11,5 @@ class OsPlatformMixin:
         elif sys.platform in self.WINDOWS:
             return '\\'
         else:
-            print('файловая система не обнаружена, может быть проблема с путями')
+            print('[ERROR] файловая система не обнаружена, может быть проблема с путями')
             sys.exit(0)

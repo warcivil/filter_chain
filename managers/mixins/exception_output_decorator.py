@@ -7,7 +7,7 @@ def exception_output(func):
         try:
             result = func(*args, **kwargs)
         except Exception as exc:
-            print(f'Произошла ошибка в методе {func.__name__}. Код ошибки:')
+            print(f'[ERROR] Произошла ошибка в методе {func.__name__}. Код ошибки:')
             print(str(exc))
             sys.exit(0)
         return result

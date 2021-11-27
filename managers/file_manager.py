@@ -9,16 +9,20 @@ from .mixins.os_platform_mixin import OsPlatformMixin
 
 
 class FileManager(OsPlatformMixin):
-    def __init__(self):
+    def __new__(cls, *args, **kwargs):
         print(f'Проверка существования путей:\n{INPUT_PATH}\n{OUTPUT_PATH}')
         if not os.path.exists(INPUT_PATH):
-            print(f'директории по пути {INPUT_PATH} не существует')
+            print(f'[ERROR] директории по пути {INPUT_PATH} не существует')
+            print('Поменять путь до директории можно в configs/config.py')
             sys.exit(0)
         if not os.path.exists(OUTPUT_PATH):
-            print(f'директории по пути {OUTPUT_PATH} не существует')
+            print(f'[ERROR] директории по пути {OUTPUT_PATH} не существует')
+            print('Поменять путь до директории можно в configs/config.py')
             sys.exit(0)
         print(f'Директории существуют. Продолжение работы')
-
+        instance = super(FileManager, cls).__new__(cls, *args, **kwargs)
+        return instance
+    def __init__(self):
         self.slash = super().get_correct_slash()
 
     def _get_file(self):
