@@ -3,8 +3,8 @@ import sys
 from filters.filters import get_even_dict, get_not_none_value_dict, get_dict_consisting_of_string
 from pathlib import PurePath
 
-INPUT_PATH = PurePath('/Users', 'sif', 'desktop', 'filter_chain', 'data_center_directory', 'inpumt')
-OUTPUT_PATH = PurePath('/Users', 'sif', 'desktop', 'filter_chain', 'data_center_directory', 'inpumt')
+INPUT_PATH = PurePath('/Users', 'sif', 'desktop', 'filter_chain', 'data_center_directory', 'input')
+OUTPUT_PATH = PurePath('/Users', 'sif', 'desktop', 'filter_chain', 'data_center_directory', 'input')
 
 FILTER_SET = [
     get_not_none_value_dict,
