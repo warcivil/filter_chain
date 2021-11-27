@@ -1,1 +1,3 @@
-python main.py
+[WINDOWS] python main.py
+
+[OS X / LINUX] python3 main.py
