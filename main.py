@@ -30,6 +30,7 @@ class FilterService:
     def job_setup(self) -> tuple[RootJob, DatasetObject]:
         print('выполнение задач\n')
         dataset, filename = next(self.datasets)
+        print('создается управляющая JOB, так же создается обьект для хранения датасетов')
         dataset_object = DatasetObject(dataset=dataset, filename=filename)
         root = RootJob(dataset_object)
         print('выполняется предварительная настройка цепочки JOB и попытка прохода по 1 датасету\n')
