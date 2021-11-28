@@ -11,7 +11,7 @@ class DatasetObject:
         self.filename = filename
 
     def __str__(self) -> str:
-        return f'имя датасета {self.filename}'
+        return f'{self.filename}'
 
     def get_dataset(self) -> dict:
         return self.dataset
@@ -53,7 +53,7 @@ class FilterService:
         root, dataset_object = self.job_setup()  # выполнение 1 задачи и создание цепочки всех job
         for dataset, filename in self.datasets:
             dataset_object.set_new_dataset(filename=filename, dataset=dataset)
-            print(dataset_object)
+            print(f'выполняется работа над датасетом: {dataset_object}')
             root.handle()
             file_manager.save_data(filename, dataset_object.get_dataset())
             print(f'{filename} успешно проведен через все JOB и записан в {OUTPUT_PATH}\n')
