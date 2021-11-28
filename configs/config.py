@@ -1,7 +1,7 @@
 import pathlib
 import sys
 from filters.default_filters import get_even_dict, get_not_none_value_dict, get_dict_consisting_of_string
-from jobs.default_job import FilterJob
+from jobs.default_job import FilterJob, AddJob
 
 from pathlib import PurePath
 
@@ -18,6 +18,7 @@ FILTER_SET = [
 # формат: name:job
 JOB_SET = {
     'FIlterJob': FilterJob,
+    'AddJob':AddJob
 }
 if INPUT_PATH == OUTPUT_PATH:
     print(
