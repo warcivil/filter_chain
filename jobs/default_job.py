@@ -1,10 +1,11 @@
 import sys
 
+from jobs.abstract_job import AbstractJob
 from jobs.base_job import RootJob
 from managers.mixins.decorators import job_exception_output
 
 
-class FilterJob(RootJob):
+class FilterJob(RootJob, AbstractJob):
     @job_exception_output
     def handle(self):
         self.change_filter_data()
@@ -21,7 +22,7 @@ class FilterJob(RootJob):
                 if choice == 'N':
                     sys.exit(0)
 
-    def __str__(self):
+    def job_description(self):
         return f'эта JOB предназначена для прохода json файла по фильтрам.\nПоставлены фильтры: {self.get_filters_name()}'
 
     def get_filters_name(self):

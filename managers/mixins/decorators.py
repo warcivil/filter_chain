@@ -10,6 +10,7 @@ def exception_output(func):
         except Exception as exc:
             print(f'[ERROR] Произошла ошибка в методе {func.__name__}. Код ошибки:')
             print(str(exc))
+            print('Возможно ошибка в некоректном json файле проверьте ваш json\nВыход')
             sys.exit(0)
         return result
 
@@ -24,6 +25,7 @@ def job_exception_output(func):
         except Exception as exc:
             print(f'[ERROR] Произошла ошибка в JOB {args[0].__class__.__name__}. Код ошибки:')
             print(str(exc))
+            print('Выход')
             sys.exit(0)
         return class_job
     return wrapper

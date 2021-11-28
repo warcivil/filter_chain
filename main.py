@@ -20,7 +20,7 @@ class FilterService:
             new_job = JOB_SET[job_name_key](dataset_object)
             root.add_modifier(new_job)
             print(f'добавлена новая JOB, {job_name_key}')
-            print(f'описание JOB: {new_job}\n')
+            print(f'описание JOB: {new_job.job_description()}\n')
         print(dataset_object)
         root.handle()
         file_manager.save_data(filename, dataset_object.get_dataset())

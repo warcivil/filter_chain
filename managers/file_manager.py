@@ -31,7 +31,6 @@ class FileManager(OsPlatformMixin):
             if file.endswith('.json'):
                 yield file
         print('в папке больше не найдено json файлов. завершение работы')
-        print(f'отформатированный файл сохранен в {OUTPUT_PATH}')
         sys.exit(0)
 
     def get_data_and_filename(self):
