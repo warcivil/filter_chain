@@ -18,7 +18,7 @@ FILTER_SET = [
 # формат: name:job
 JOB_SET = {
     'FIlterJob': FilterJob,
-    'AddJob':AddJob
+    #'AddJob':AddJob
 }
 if INPUT_PATH == OUTPUT_PATH:
     print(
