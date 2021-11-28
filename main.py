@@ -9,7 +9,6 @@ class DatasetObject:
     def __init__(self, dataset, filename) -> None:
         self.dataset = dataset
         self.filename = filename
-        self.filters = FILTER_SET
 
     def __str__(self) -> str:
         return f'имя датасета {self.filename}'
@@ -24,7 +23,6 @@ class DatasetObject:
 
 class FilterService:
     def __init__(self) -> None:
-        self.filter_set = FILTER_SET
         self.datasets = file_manager.get_data_and_filename()
 
     @exception_output

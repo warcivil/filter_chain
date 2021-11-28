@@ -1,5 +1,6 @@
 import sys
 
+from configs.job_config.filter_job_config import FILTER_SET
 from jobs.abstract_job import AbstractJob
 from jobs.base_job import RootJob
 from managers.mixins.decorators import job_exception_output
@@ -12,7 +13,7 @@ class FilterJob(RootJob, AbstractJob):
         super().handle()
 
     def change_filter_data(self):
-        for filter in self.dataset_object.filters:
+        for filter in FILTER_SET:
             try:
                 self.dataset_object.dataset = filter(self.dataset_object.dataset)
             except Exception as exc:
@@ -26,7 +27,7 @@ class FilterJob(RootJob, AbstractJob):
         return f'эта JOB предназначена для прохода json файла по фильтрам.\nПоставлены фильтры: {self.get_filters_name()}'
 
     def get_filters_name(self):
-        return [filter.__name__ for filter in self.dataset_object.filters]
+        return [filter.__name__ for filter in FILTER_SET]
 
 
 class AddJob(RootJob, AbstractJob):
