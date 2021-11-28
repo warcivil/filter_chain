@@ -1,6 +1,7 @@
 import json
 import os
 import sys
+import datetime
 
 from configs.config import INPUT_PATH, OUTPUT_PATH
 
@@ -19,18 +20,20 @@ class FileManager(OsPlatformMixin):
             print(f'[ERROR] директории по пути {OUTPUT_PATH} не существует')
             print('Поменять путь до директории можно в configs/config.py')
             sys.exit(0)
-        print(f'Директории существуют. Продолжение работы')
+        print(f'Директории существуют. Продолжение работы\n')
         instance = super(FileManager, cls).__new__(cls, *args, **kwargs)
         return instance
+
     def __init__(self):
         self.slash = super().get_correct_slash()
 
     def _get_file(self):
+        time_now = datetime.datetime.now()
         for file in os.listdir(INPUT_PATH):
             if file.endswith('.json'):
                 yield file
         print('в папке больше не найдено json файлов. завершение работы')
-        print(f'отформатированный файл сохранен в {OUTPUT_PATH}')
+        print(f'время выполнения: {datetime.datetime.now() - time_now}')
         sys.exit(0)
 
     def get_data_and_filename(self):
