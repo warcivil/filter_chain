@@ -20,6 +20,9 @@ class DatasetObject:
         self.dataset = dataset
         self.filename = filename
 
+    def save_dataset(self) -> None:
+        file_manager.save_data(self.filename, self.dataset)
+
 
 class FilterService:
     def __init__(self) -> None:
@@ -42,7 +45,7 @@ class FilterService:
 
         print(dataset_object)
         root.handle()
-        file_manager.save_data(filename, dataset_object.get_dataset())
+        dataset_object.save_dataset()
         print(f'JOBS {FilterService.get_jobs_name_list()} выставлены в цепочку, выполняется их запуск')
         print(f'{filename} успешно проведен через все JOB и записан в {OUTPUT_PATH}\n')
         return root, dataset_object
@@ -55,7 +58,7 @@ class FilterService:
             dataset_object.set_new_dataset(filename=filename, dataset=dataset)
             print(f'выполняется работа над датасетом: {dataset_object}')
             root.handle()
-            file_manager.save_data(filename, dataset_object.get_dataset())
+            dataset_object.save_dataset()
             print(f'{filename} успешно проведен через все JOB и записан в {OUTPUT_PATH}\n')
 
     @staticmethod
