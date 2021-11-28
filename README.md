@@ -14,11 +14,17 @@ job должен наследовать 2 класса
  
  пример job
 ```python
-class FilterJob(RootJob, AbstractJob):
+class AddJob(RootJob, AbstractJob):
     @job_exception_output
     def handle(self):
-      self.change_filter_data()
-      super().handle()
+        self.add_in_dataset()
+        super().handle()
+
+    def add_in_dataset(self):
+        self.dataset_object.dataset['name'] = 100
+
+    def job_description(self):
+        return f'эта JOB которая создает поле name и ложит туда 100'
 ```
 handle - это метод работник, здесь переопределяется метод handle от RootJob, здесь происходит вся работа. после ее выполнения не забудьте вызвать super().handler(), таким образом вы отдадите указание на выполнение следующей job 
 
