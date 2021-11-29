@@ -33,11 +33,8 @@ class FilterService:
     def job_setup(self) -> tuple[RootJob, DatasetObject]:
         logging.info('выполнение задач\n')
         dataset, filename = next(self.datasets)
-        logging.info('создается корневая JOB, так же создается обьект для хранения датасетов')
         dataset_object = DatasetObject(dataset=dataset, filename=filename)
         root = RootJob(dataset_object)
-        logging.info('выполняется предварительная настройка цепочки JOB и попытка прохода по 1 датасету\n')
-
         for job_name_key in JOB_SET.keys():
             new_job = JOB_SET[job_name_key](dataset_object)
             root.add_modifier(new_job)
@@ -47,7 +44,6 @@ class FilterService:
         logging.info(dataset_object)
         root.handle()
         dataset_object.save_dataset()
-        logging.info(f'JOBS {FilterService.get_jobs_name_list()} выставлены в цепочку, выполняется их запуск')
         logging.info(f'{filename} успешно проведен через все JOB и записан в {OUTPUT_PATH}\n')
         return root, dataset_object
 
