@@ -1,43 +1,63 @@
 import sys
 
-from configs.job_config.filter_job_config import FILTER_SET
+from functools import lru_cache
 from jobs.abstract_job import AbstractJob
 from jobs.base_job import RootJob
 from managers.mixins.decorators import job_exception_output
 
 
-class FilterJob(RootJob, AbstractJob):
+class NumberFilterJob(RootJob, AbstractJob):
     @job_exception_output
     def handle(self):
-        self.change_filter_data()
+        self.filter()
         super().handle()
 
-    def change_filter_data(self):
-        for filter in FILTER_SET:
-            try:
-                self.dataset_object.dataset = filter(self.dataset_object.dataset)
-            except Exception as exc:
-                print(f"произошла ошибка в фильтре {self.dataset_object.filter.__name__}")
-                print(f"текст ошибки {str(exc)}")
-                choice = input('продолжить работу (Y или N)?: ')
-                if choice == 'N':
-                    sys.exit(0)
+    def filter(self):
+        self.dataset_object.dataset = dict(filter(self.even_filter, self.dataset_object.dataset.items()))
+
+    @lru_cache
+    def even_filter(self, item):
+        return type(item[1]) in (int,) and item[1] % 2 == 1
 
     def job_description(self):
-        return f'эта JOB предназначена для прохода json файла по фильтрам.\nПоставлены фильтры: {self.get_filters_name()}'
-
-    def get_filters_name(self):
-        return [filter.__name__ for filter in FILTER_SET]
+        return f'данная JOB производит фильтрацию по числам'
 
 
-class AddJob(RootJob, AbstractJob):
+class NoneFilterJob(RootJob, AbstractJob):
     @job_exception_output
     def handle(self):
-        self.add_in_dataset()
+        self.filter()
         super().handle()
 
-    def add_in_dataset(self):
-        self.dataset_object.dataset['name'] = 100
+    def filter(self):
+        self.dataset_object.dataset = dict(filter(self.none_filter, self.dataset_object.dataset.items()))
+
+    def none_filter(self, item):
+        return item[1] is not None
 
     def job_description(self):
-        return f'эта JOB которая создает поле name и ложит туда 100'
+        return f'данная JOB работает с None значениями'
+
+
+class KeyFilterJob(RootJob, AbstractJob):
+    @job_exception_output
+    def handle(self):
+        self.filter()
+        super().handle()
+
+    def filter(self):
+        self.dataset_object.dataset = dict(
+            filter(self.get_item_consisting_of_string, self.dataset_object.dataset.items()))
+        self.get_lower_key()
+
+    def get_item_consisting_of_string(self, item):
+        return isinstance(item[0], str) and item[0].isalpha()
+
+    def get_lower_key(self):
+        additional_dict = dict()
+        for key, value in self.dataset_object.dataset.items():
+            additional_dict[str.lower(key)] = value
+        self.dataset_object.dataset = additional_dict
+
+    def job_description(self):
+        return f'данная JOB работает с ключами датасета'

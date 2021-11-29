@@ -2,25 +2,26 @@ import json
 import os
 import sys
 import datetime
-
+import logging
 from configs.config import INPUT_PATH, OUTPUT_PATH
 
 from .mixins.decorators import exception_output
 from .mixins.os_platform_mixin import OsPlatformMixin
 
+logging.basicConfig(level=logging.DEBUG)
 
 class FileManager(OsPlatformMixin):
     def __new__(cls, *args, **kwargs):
-        print(f'Проверка существования путей:\n{INPUT_PATH}\n{OUTPUT_PATH}')
+        logging.info(f'Проверка существования путей:\n{INPUT_PATH}\n{OUTPUT_PATH}')
         if not os.path.exists(INPUT_PATH):
-            print(f'[ERROR] директории по пути {INPUT_PATH} не существует')
-            print('Поменять путь до директории можно в configs/config.py')
+            logging.error(f'директории по пути {INPUT_PATH} не существует')
+            logging.info('Поменять путь до директории можно в configs/config.py')
             sys.exit(0)
         if not os.path.exists(OUTPUT_PATH):
-            print(f'[ERROR] директории по пути {OUTPUT_PATH} не существует')
-            print('Поменять путь до директории можно в configs/config.py')
+            logging.error(f'[ERROR] директории по пути {OUTPUT_PATH} не существует')
+            logging.info('Поменять путь до директории можно в configs/config.py')
             sys.exit(0)
-        print(f'Директории существуют. Продолжение работы\n')
+        logging.info(f'Директории существуют. Продолжение работы\n')
         instance = super(FileManager, cls).__new__(cls, *args, **kwargs)
         return instance
 
@@ -32,8 +33,8 @@ class FileManager(OsPlatformMixin):
         for file in os.listdir(INPUT_PATH):
             if file.endswith('.json'):
                 yield file
-        print('в папке больше не найдено json файлов. завершение работы')
-        print(f'время выполнения: {datetime.datetime.now() - time_now}')
+        logging.info('в папке больше не найдено json файлов. завершение работы')
+        logging.info(f'время выполнения: {datetime.datetime.now() - time_now}')
         sys.exit(0)
 
     def get_data_and_filename(self):

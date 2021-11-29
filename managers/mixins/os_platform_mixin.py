@@ -1,4 +1,7 @@
 import sys
+import logging
+
+logging.basicConfig(level=logging.DEBUG)
 
 class OsPlatformMixin:
     OS_X = ['os2', 'darwin', 'os2emx']
@@ -11,5 +14,5 @@ class OsPlatformMixin:
         elif sys.platform in self.WINDOWS:
             return '\\'
         else:
-            print('[ERROR] файловая система не обнаружена, может быть проблема с путями')
+            logging.error('файловая система не обнаружена, может быть проблема с путями')
             sys.exit(0)
