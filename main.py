@@ -1,3 +1,5 @@
+from typing import Tuple
+
 from configs.config import JOB_SET, OUTPUT_PATH
 from configs.job_config.filter_job_config import FILTER_SET
 from jobs.base_job import RootJob
@@ -29,7 +31,7 @@ class FilterService:
         self.datasets = file_manager.get_data_and_filename()
 
     @exception_output
-    def job_setup(self) -> tuple[RootJob, DatasetObject]:
+    def job_setup(self) -> Tuple[RootJob, DatasetObject]:
         print('выполнение задач\n')
         dataset, filename = next(self.datasets)
         print('создается корневая JOB, так же создается обьект для хранения датасетов')
