@@ -9,13 +9,12 @@ from managers.mixins.decorators import job_exception_output
 class NumberFilterJob(RootJob, AbstractJob):
     @job_exception_output
     def handle(self):
-        self.filter()
+        self.run_filters()
         super().handle()
 
-    def filter(self):
+    def run_filters(self):
         self.dataset_object.dataset = dict(filter(self.even_filter, self.dataset_object.dataset.items()))
 
-    @lru_cache
     def even_filter(self, item):
         return type(item[1]) in (int,) and item[1] % 2 == 1
 
@@ -26,13 +25,13 @@ class NumberFilterJob(RootJob, AbstractJob):
 class NoneFilterJob(RootJob, AbstractJob):
     @job_exception_output
     def handle(self):
-        self.filter()
+        self.run_filters()
         super().handle()
 
-    def filter(self):
-        self.dataset_object.dataset = dict(filter(self.none_filter, self.dataset_object.dataset.items()))
+    def run_filters(self):
+        self.dataset_object.dataset = dict(filter(self.get_not_none_item, self.dataset_object.dataset.items()))
 
-    def none_filter(self, item):
+    def get_not_none_item(self, item):
         return item[1] is not None
 
     def job_description(self):
@@ -42,10 +41,10 @@ class NoneFilterJob(RootJob, AbstractJob):
 class KeyFilterJob(RootJob, AbstractJob):
     @job_exception_output
     def handle(self):
-        self.filter()
+        self.run_filters()
         super().handle()
 
-    def filter(self):
+    def run_filters(self):
         self.dataset_object.dataset = dict(
             filter(self.get_item_consisting_of_string, self.dataset_object.dataset.items()))
         self.get_lower_key()

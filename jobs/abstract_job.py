@@ -3,7 +3,7 @@ from abc import ABC, abstractmethod
 
 class AbstractJob(ABC):
     @abstractmethod
-    def filter(self):
+    def run_filters(self):
         pass
 
     @abstractmethod
