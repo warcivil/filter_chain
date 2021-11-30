@@ -9,16 +9,14 @@ class NumberFilterJob(RootJob):
     @job_exception_output
     def handle(self):
         for key in self.dataset_object.dataset.copy():
-            if self.even_filter(self.dataset_object.dataset[key]) and self.mod10_filter(
-                    self.dataset_object.dataset[key]): # из за and вызов фильтров пректратится если придет хоть один else
+            if self.even_filter(self.dataset_object.dataset[key]):
                 self.dataset_object.dataset.pop(key)
         super().handle()
 
-    # удаляет элементы которые делятся на 2 и на 4
     def even_filter(self, item):
         return type(item) in (int,) and item % 2 == 0  #
 
-    def mod10_filter(self, item):  # это пример фильтра, чтобы показать как можно оптимизировать два фильтра и больше фильтров
+    def mod4_filter(self, item):
         return item % 4 == 0
 
     def job_description(self):
