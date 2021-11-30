@@ -1,56 +1,56 @@
 import sys
 
 from functools import lru_cache
-from jobs.abstract_job import AbstractJob
 from jobs.base_job import RootJob
 from managers.mixins.decorators import job_exception_output
 
 
-class NumberFilterJob(RootJob, AbstractJob):
+class NumberFilterJob(RootJob):
     @job_exception_output
     def handle(self):
-        self.run_filters()
+        for key in self.dataset_object.dataset.copy():
+            if self.even_filter(self.dataset_object.dataset[key]) and self.mod10_filter(
+                    self.dataset_object.dataset[key]): # из за and вызов фильтров пректратится если придет хоть один else
+                self.dataset_object.dataset.pop(key)
         super().handle()
 
-    def run_filters(self):
-        self.dataset_object.dataset = dict(filter(self.even_filter, self.dataset_object.dataset.items()))
-
+    # удаляет элементы которые делятся на 2 и на 4
     def even_filter(self, item):
-        return type(item[1]) in (int,) and item[1] % 2 == 1
+        return type(item) in (int,) and item % 2 == 0  #
+
+    def mod10_filter(self, item):  # это пример фильтра, чтобы показать как можно оптимизировать два фильтра и больше фильтров
+        return item % 4 == 0
 
     def job_description(self):
-        return f'данная JOB производит фильтрацию по числам'
+        return f'данная JOB работает с ключами датасета'
 
 
-class NoneFilterJob(RootJob, AbstractJob):
+class NoneFilterJob(RootJob):
     @job_exception_output
     def handle(self):
-        self.run_filters()
+        for key in self.dataset_object.dataset.copy():
+            if self.get_not_none_item(self.dataset_object.dataset[key]):
+                self.dataset_object.dataset.pop(key)
         super().handle()
 
-    def run_filters(self):
-        self.dataset_object.dataset = dict(filter(self.get_not_none_item, self.dataset_object.dataset.items()))
-
     def get_not_none_item(self, item):
-        return item[1] is not None
+        return item is None
 
     def job_description(self):
         return f'данная JOB работает с None значениями'
 
 
-class KeyFilterJob(RootJob, AbstractJob):
+class KeyFilterJob(RootJob):
     @job_exception_output
     def handle(self):
-        self.run_filters()
+        for key in self.dataset_object.dataset.copy():
+            if self.get_item_consisting_of_string(key):
+                self.dataset_object.dataset.pop(key)
+        self.get_lower_key()
         super().handle()
 
-    def run_filters(self):
-        self.dataset_object.dataset = dict(
-            filter(self.get_item_consisting_of_string, self.dataset_object.dataset.items()))
-        self.get_lower_key()
-
     def get_item_consisting_of_string(self, item):
-        return isinstance(item[0], str) and item[0].isalpha()
+        return not (isinstance(item, str) and item.isalpha())
 
     def get_lower_key(self):
         additional_dict = dict()
