@@ -1,3 +1,8 @@
+обратите внимние, что есть 2 ветки
+
+набор кастомных фильтр сетов для фильтрации json
+
+
 [WINDOWS] python main.py
 
 [OS X / LINUX] python3 main.py
